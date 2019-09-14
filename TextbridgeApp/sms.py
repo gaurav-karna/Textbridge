@@ -1,4 +1,5 @@
 from twilio.rest import Client
+
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
 import secrets
@@ -22,22 +23,5 @@ class SendRecTexts:
 
         print(message.sid)
     def RecText(self)
-
-    @app.route("/sms", methods=['POST'])
-    def sms_reply():
-        """Respond to incoming calls with a simple text message."""
-
-        # Use this data in your application logic
-        from_number = request.form['From']
-        to_number = request.form['To']
-        body = request.form['Body']
-
-        # Start our TwiML response
-        resp = MessagingResponse()
-
-        # Add a message
-        resp.message("The Robots are coming! Head for the hills!")
-
-        return str(resp)
 obj = SendRecTexts()
 # obj.sendTexts("Send this to me","+16476716466")

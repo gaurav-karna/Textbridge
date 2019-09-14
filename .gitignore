@@ -10,6 +10,8 @@
 # Ignore all python cache files in Textbridge
 /Textbridge/__pycache__/
 
+/Textbridge/secrets.py
+
 # Ignore all pycache in root folder
 __pycache__/*
 

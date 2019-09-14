@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.contrib import admin
 from . import views
-import django.contrib.auth
+from django.contrib.auth import views as auth_views
 from django.conf import settings
 
 urlpatterns = [
@@ -10,7 +10,10 @@ urlpatterns = [
 
     # public paths, open to everyone // self-explanatory
     path('', views.index, name='index'),
-    path('/register', views.register, name='register'),
-    path('/register_failure', views.register, name='register_failure'),
-    path('/parse_friend_list', views.parse_friend_list, name='parse_friend_list'),
+    path('login_home', views.login_home, name='login_home'),
+    path('register/', views.register, name='register'),
+    path('register_failure/', views.register, name='register_failure'),
+    path('parse_friend_list', views.parse_friend_list, name='parse_friend_list'),
+    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path('social-auth/', include('social_django.urls', namespace="social")),
 ]

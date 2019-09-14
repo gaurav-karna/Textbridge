@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-
+from .secrets import *
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -27,11 +27,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost',]
 
+SOCIAL_AUTH_FACEBOOK_KEY = secret_facebook_key        # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = facebook_app_secret  # App Secret
 
 # Application definition
 
 INSTALLED_APPS = [
     'TextbridgeApp',
+    'social_django',
+    'social_core',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,6 +56,19 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Textbridge.urls'
+
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'login_home'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = ''
+
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',            # kept so that superuser can be created...
+]
 
 
 TEMPLATES = [
