@@ -20,12 +20,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'cr-i!shwx#du04l$v!cltm(m^=dhtdu45obb0@-j2f-l*a33bb'
+SECRET_KEY = django_secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost',]
+ALLOWED_HOSTS = [
+    'localhost',
+]
 
 SOCIAL_AUTH_FACEBOOK_KEY = secret_facebook_key        # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = facebook_app_secret  # App Secret
@@ -82,9 +84,23 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
+]
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link', 'user_friends']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+  'fields': 'id, name, email, user_link, user_friends'
+}
+SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
+    ('name', 'name'),
+    ('email', 'email'),
+    ('link', 'profile_url'),
+    ('user_friends', 'user_friends'),
+    (None, 'phone_number')
 ]
 
 WSGI_APPLICATION = 'Textbridge.wsgi.application'
@@ -107,7 +123,7 @@ if DEBUG:
     }
 else:
     # These are PRODUCTION database credentials, do not change.
-    pass
+    DATABASES = prod_database_settings
 
 
 # Password validation

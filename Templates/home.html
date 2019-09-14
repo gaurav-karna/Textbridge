@@ -2,9 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    {% block title %}
+    <title>Textbridge | Home</title>
+    {% endblock %}
 </head>
 <body>
+    {% block content %}
+    <h1>Textbridge Home</h1>
+    <h3><a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a></h3>
 
+    <h3>About</h3>
+    <h3>Team</h3>
+    <h3>Contact</h3>
+    {% endblock %}
 </body>
 </html>

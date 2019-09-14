@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'home.html' %}
 
-</body>
-</html>
+{% block title %}
+<title>Textbridge | Login Home</title>
+{% endblock %}
+
+{% block content %}
+
+    <h3>Logged in as: {{ user.name }}</h3>
+    <h4>Your Information:</h4>
+    <ul>
+        <li>Name: {{ user.name }}</li>
+        <li>Email: {{ user.email }}</li>
+        {% if user.phone_number is None %}
+            <li>Phone: Not Provided | <a href="register.html">Add your Phone Number</a></li>
+        {% else %}
+            <li>Phone: {{ user.phone_number }} | <a href="register.html">Edit your Phone Number</a></li>
+        {% endif %}
+    </ul>
+
+{% endblock %}

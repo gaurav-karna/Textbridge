@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'home.html'%}
 
-</body>
-</html>
+{% block title %}
+<title>Registration Error | Textbridge</title>
+{% endblock %}
+
+{% block content %}
+<h1>Registration Error</h1>
+
+<h3>See error message below:</h3>
+{% if error_message %}
+    <p><b>{{ error_message }}</b></p>
+{% else %}
+    <p><b>Unknown Error</b></p>
+{% endif %}
+
+{% endblock %}

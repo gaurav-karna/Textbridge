@@ -13,7 +13,7 @@ urlpatterns = [
     path('login_home', views.login_home, name='login_home'),
     path('register/', views.register, name='register'),
     path('register_failure/', views.register, name='register_failure'),
-    path('parse_friend_list', views.parse_friend_list, name='parse_friend_list'),
+    # path('parse_friend_list', views.parse_friend_list, name='parse_friend_list'),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path('social-auth/', include('social_django.urls', namespace="social")),
 ]
