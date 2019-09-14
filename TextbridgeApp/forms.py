@@ -3,4 +3,9 @@ from .models import *
 
 
 class TextbridgeUserForm(forms.ModelForm):
-    pass
+    class Meta():
+        model = TextbridgeUser
+
+        fields = [
+            'Phone_Number',
+        ]

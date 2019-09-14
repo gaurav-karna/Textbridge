@@ -10,4 +10,6 @@ urlpatterns = [
 
     # public paths, open to everyone // self-explanatory
     path('', views.index, name='index'),
+    path('/register', views.register, name='register'),
+    path('/register_success', views.register, name='register_success'),
 ]
