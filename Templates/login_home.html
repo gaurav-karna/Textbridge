@@ -6,16 +6,24 @@
 
 {% block content %}
 
-    <h3>Logged in as: {{ user.name }}</h3>
+    <h3>Logged in as: {{ user.first_name }} {{ user.last_name }}</h3>
+    <h4><a href="/delete_account">Delete Account</a></h4>
     <h4>Your Information:</h4>
     <ul>
-        <li>Name: {{ user.name }}</li>
         <li>Email: {{ user.email }}</li>
-        {% if user.phone_number is None %}
-            <li>Phone: Not Provided | <a href="register.html">Add your Phone Number</a></li>
+        <li>UID: {{ fb_user.uid }}</li>
+        {% if fb_user.extra_data.phone_number is None %}
+            <li>Phone: Not Provided | <a href="/register">Add your Phone Number</a></li>
         {% else %}
-            <li>Phone: {{ user.phone_number }} | <a href="register.html">Edit your Phone Number</a></li>
+            <li>Phone: {{ fb_user.extra_data.phone_number }} | <a href="/register">Edit your Phone Number</a></li>
         {% endif %}
+        <li>Friend List:
+            <ul>
+                {% for entry in fb_user.extra_data.all_friends.data %}
+                    <li>{{ entry.name }}</li>
+                {% endfor %}
+            </ul>
+        </li>
     </ul>
 
 {% endblock %}

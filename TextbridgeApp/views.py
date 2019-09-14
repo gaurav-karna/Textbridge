@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from twilio.rest import Client
 from .forms import *
-
+from .models import *
+from django.contrib.auth.models import User
+import social_django
 from django.contrib.auth.decorators import login_required
 
 
@@ -13,7 +15,8 @@ def index(request):
 # contains link to add/update phone number, and will have messages for successful phone number + friend list updates
 @login_required
 def login_home(request):
-    return render(request, "login_home.html")
+    logged_in_user = request.user.social_auth.filter(provider='facebook').first()
+    return render(request, "login_home.html", {'fb_user': logged_in_user})
 
 
 # will only be available if user is logged in via Facebook
@@ -21,27 +24,30 @@ def login_home(request):
 def register(request):
     if request.method == "POST":
         phone_to_save = TextbridgeUserForm(request.POST)
-        user_to_save = request.user
         if phone_to_save.is_valid():
-            if (len(phone_to_save.Phone_Number) != 12) or (not phone_to_save.Phone_Number.startswith('+1')):
+            new_phone = phone_to_save.save()
+            if (len(new_phone.Phone_Number) != 12) or (not new_phone.Phone_Number.startswith('+1')):
                 # informs the user that the phone number is not formatted correctly
                 return render(request, "registration_error.html", {
                     'error_message': 'Please format your phone number like: \'+12345678910\' '})
             else:
-                user_to_save.phone_number = phone_to_save.Phone_Number
-                user_to_save.save()
+                logged_in_user = request.user.social_auth.filter(provider='facebook').first()
+                logged_in_user.extra_data['phone_number'] = new_phone.Phone_Number
+                logged_in_user.save()
+                return login_home(request)
         else:
             return render(request, "registration_error.html", {
                 'error_message': 'Please format your phone number like: \'+12345678910\' '})
-        return render(request, "login_home.html")
     else:
         # ensure that the same form can be used to edit their phone number
         return render(request, "register.html", {'phone_form': TextbridgeUserForm()})
 
 
-# will only be triggered by button on login home that is only seen when person is logged in via facebook
-# def parse_friend_list(request):
-#     pass
+# delets the account from database
+def delete_account(request):
+    to_delete = User.objects.filter(email=request.user.email).first()
+    to_delete.delete()
+    return redirect('index')
 
 
 # will only be available if user is logged in via Facebook and registers their phone number

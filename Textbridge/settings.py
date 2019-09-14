@@ -93,13 +93,14 @@ TEMPLATES = [
 
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link', 'user_friends']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-  'fields': 'id, name, email, user_link, user_friends'
+    'fields': 'id, name, email, link, friends'
 }
 SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
     ('name', 'name'),
     ('email', 'email'),
     ('link', 'profile_url'),
-    ('user_friends', 'user_friends'),
+    ('friends', 'all_friends'),
+    # ('user_friends', 'user_friends'),
     (None, 'phone_number')
 ]
 
