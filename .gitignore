@@ -109,4 +109,7 @@ fabric.properties
 # Sonarlint plugin
 .idea/sonarlint
 
+TextbridgeApp/secrets.py
+TextbridgeApp/test_rec.py
+
 # End of https://www.gitignore.io/api/pycharm

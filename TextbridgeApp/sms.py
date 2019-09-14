@@ -1,13 +1,16 @@
 from twilio.rest import Client
 
-
+from flask import Flask, request, redirect
+from twilio.twiml.messaging_response import MessagingResponse
+import secrets
+app = Flask(__name__)
 # Your Account Sid and Auth Token from twilio.com/console
 # DANGER! This is insecure. See http://twil.io/secure
 
 
 class SendRecTexts:
-    account_sid = 'ACeb788af8b4a0ca95b03fd72fef99f208'
-    auth_token = '06c29d9d5b21a77984b44d8065285f17'
+    account_sid = secrets.twilio_account_sid
+    auth_token = secrets.twilio_auth_token
     def sendTexts(self,content,to_):
         client = Client(self.account_sid, self.auth_token)
 
