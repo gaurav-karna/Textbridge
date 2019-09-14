@@ -32,6 +32,8 @@ ALLOWED_HOSTS = ['localhost',]
 
 INSTALLED_APPS = [
     'TextbridgeApp',
+    'social_django',
+    'social_core',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,6 +54,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Textbridge.urls'
+
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',            # kept so that superuser can be created...
+]
 
 
 TEMPLATES = [

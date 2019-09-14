@@ -10,7 +10,7 @@ urlpatterns = [
 
     # public paths, open to everyone // self-explanatory
     path('', views.index, name='index'),
-    path('/register', views.register, name='register'),
-    path('/register_failure', views.register, name='register_failure'),
-    path('/parse_friend_list', views.parse_friend_list, name='parse_friend_list'),
+    path('register', views.register, name='register'),
+    path('register_failure', views.register, name='register_failure'),
+    path('parse_friend_list', views.parse_friend_list, name='parse_friend_list'),
 ]
