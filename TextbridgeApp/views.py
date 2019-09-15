@@ -84,7 +84,7 @@ def get_user_friends(from_number):
 
 def get_to_number(to_name: str):
     user_list = User.objects.all()
-    if not user_list:
+    if user_list:
         return "this is what it is"
     # for entry in user_list:
     #     return entry.first_name + entry.last_name
