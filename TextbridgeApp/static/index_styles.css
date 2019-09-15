@@ -1,0 +1,47 @@
+.indexBackground{
+    padding: 0 0 50px 0;
+}
+
+.welcome_div{
+    height: 93vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.welcome_text{
+    font-size: 350%;
+    z-index: 0;
+    text-align: center;
+
+}
+.welcome_word{
+    padding-top: 6%;
+}
+
+.main_wallpaper{
+    z-index: -1;
+    width: 100%;
+    height: 90vh;
+    position: absolute;
+}
+
+.heading{
+    margin-left: 7.5%;
+    margin-top: 3%;
+}
+
+.fas{
+    color: black;
+    font-size: 3rem;
+}
+
+.center_icon_div{
+    text-align: center;
+    padding-top: 35vh;
+}
+
+
+
+
+

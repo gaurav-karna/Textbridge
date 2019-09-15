@@ -10,7 +10,7 @@ urlpatterns = [
 
     # public paths, open to everyone // self-explanatory
     path('', views.index, name='index'),
-    path('login_home', views.login_home, name='login_home'),
+    path('login_home/', views.login_home, name='login_home'),
     path('register/', views.register, name='register'),
     path('register_failure/', views.register, name='register_failure'),
     path('delete_account/', views.delete_account, name='delete_account'),
