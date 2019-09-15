@@ -1,0 +1,30 @@
+/*
+font-family: 'Montserrat', sans-serif;
+font-family: 'Roboto Condensed', sans-serif; 
+font-family: 'Bitter', serif;
+ */
+
+.background{
+    background-color: #EEEEEE;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.white_box{
+    background-color: white;
+    text-align: center;
+    height: 20rem;
+    width: 20rem;
+    border-radius: 2%; 
+    margin: 11% auto;
+}
+
+.login_with_fb_btn{
+    margin-top: 27%;
+}
+
+
+
