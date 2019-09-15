@@ -92,10 +92,15 @@ def get_to_number(to_name: str):
 
 @csrf_exempt
 def sms_api(request):
+    message_body = str(request.POST['Body'])
+    from_number = str(request.POST['From'])
+
+    to_name = message_body.split('\n')[0]
+
     # Start our TwiML response
     resp = MessagingResponse()
     # Add a text message
-    msg = resp.message("Message from: {}\n{}".format(str(request.POST['From']), str(request.POST['Body'])))
+    msg = resp.message("Message to: {}\n{}".format(to_name, message_body))
     return HttpResponse(str(resp))
 # @csrf_exempt
 # def sms_api(request):
