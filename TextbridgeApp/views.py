@@ -63,7 +63,5 @@ def registration_success(request):
 def sms_api(request):
     resp = MessagingResponse()
     resp.message(str(request))
-    return str(resp)
-
-
+    print(str(resp))
 
