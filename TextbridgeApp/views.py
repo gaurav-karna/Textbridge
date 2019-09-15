@@ -103,10 +103,11 @@ def sms_api(request):
     resp = MessagingResponse()
 
     # Add a text message
-    if to_number is not None:
-        msg = resp.message("Message to: {} at {}\n{}".format(to_name, str(to_number), message_body))
-    else:
-        msg = resp.message("Message to: {}\n{}".format(to_name, message_body))
+    # if to_number is not None:
+    #     msg = resp.message("Message to: {} at {}\n{}".format(to_name, str(to_number), message_body))
+    # else:
+    #     msg = resp.message("Message to: {}\n{}".format(to_name, message_body))
+    msg = resp.message("Message from: {} at {}\n{}".format('NAME', from_number, message_body), to=to_number)
     return HttpResponse(str(resp))
 # @csrf_exempt
 # def sms_api(request):
