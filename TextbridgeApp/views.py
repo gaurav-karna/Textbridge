@@ -104,7 +104,7 @@ def sms_api(request):
         msg = resp.message("Could not find your number in our system. Please register at https://textbridge.online")
         return HttpResponse(str(resp)) # send failure text with return that number has not been registered with us
 
-    msg = resp.message("Got here! From_Name: {}".format(from_name))
+    msg = resp.message("Got here! From_Name: " + from_name)
     return HttpResponse(str(resp))
     # returns a dict where keys are friends names, and values are user objects
     user_friends = get_user_friends(from_number)
