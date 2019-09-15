@@ -92,35 +92,33 @@ def get_to_number(to_name: str):
 
 @csrf_exempt
 def sms_api(request):
-    if request.method == 'POST':
-        # Start our TwiML response
-        resp = MessagingResponse()
+    # Start our TwiML response
+    resp = MessagingResponse()
 
-        # getting info from request
-        message_body = str(request.POST['Body'])
-        to_name = message_body.split('\n')[0]           # user-responsible for first line being first and last name
-        from_number = str(request.POST['From'])
+    # getting info from request
+    message_body = str(request.POST['Body'])
+    to_name = message_body.split('\n')[0]           # user-responsible for first line being first and last name
+    from_number = str(request.POST['From'])
 
-        from_name = get_from_name(from_number)
-        if from_name is None:
-            msg = resp.message("Could not find your number in our system. Please register at https://textbridge.online")
-            return HttpResponse(str(resp)) # send failure text with return that number has not been registered with us
+    from_name = get_from_name(from_number)
+    if from_name is None:
+        msg = resp.message("Could not find your number in our system. Please register at https://textbridge.online")
+        return HttpResponse(str(resp)) # send failure text with return that number has not been registered with us
 
-        # returns a dict where keys are friends names, and values are user objects
-        user_friends = get_user_friends(from_number)
-        if not user_friends:
-            msg = resp.message("Could not parse your friend list. Please register at https://textbridge.online")
-            return HttpResponse(str(resp))  # friend list could not be parsed (FAILURE)
+    # returns a dict where keys are friends names, and values are user objects
+    user_friends = get_user_friends(from_number)
+    if not user_friends:
+        msg = resp.message("Could not parse your friend list. Please register at https://textbridge.online")
+        return HttpResponse(str(resp))  # friend list could not be parsed (FAILURE)
 
-        to_number = user_friends.get(to_name.lower(), None)
-        if to_number is None:
-            # send failure text with return saying that user's number could not be found
-            msg = resp.message("Could not retrieve recipient's number. Either not registered, or not your friend")
-            return HttpResponse(str(resp))
-
-        # successful text redirect
-        msg = resp.message("Message from: {}\n{}".format(from_name, message_body), to=to_number)
+    to_number = user_friends.get(to_name.lower(), None)
+    if to_number is None:
+        # send failure text with return saying that user's number could not be found
+        msg = resp.message("Could not retrieve recipient's number. Either not registered, or not your friend")
         return HttpResponse(str(resp))
-    else:
-        return HttpResponse(status=500)
+
+    # successful text redirect
+    msg = resp.message("Message from: {}\n{}".format(from_name, message_body), to=to_number)
+    return HttpResponse(str(resp))
+
 
