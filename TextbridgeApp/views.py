@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect
 from twilio.rest import Client
+from .secrets_twilio import *
 from .forms import *
 from .models import *
 from django.contrib.auth.models import User
 import social_django
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from twilio.twiml.messaging_response import MessagingResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
@@ -53,3 +57,16 @@ def delete_account(request):
 # will only be available if user is logged in via Facebook and registers their phone number
 def registration_success(request):
     return render(request, "login_home.html", {})
+
+
+@csrf_exempt
+def sms_api(request):
+    if request.method == 'POST':
+        resp = MessagingResponse()
+        resp.message(str(request))
+        return str(resp)
+    else:
+        pass
+
+
+
