@@ -84,9 +84,9 @@ def get_user_friends(from_number):
 
 def get_to_number(to_name: str):
     user_list = User.objects.all()
-    for entry in user_list:
-        if "{} {}".format(entry.first_name, entry.last_name).lower() == to_name.lower():
-            return entry.social_auth.extra_data['phone_number']
+    # for entry in user_list:
+    #     if "{} {}".format(entry.first_name, entry.last_name).lower() == to_name.lower():
+    #         return entry.social_auth.extra_data['phone_number']
     return None
 
 
