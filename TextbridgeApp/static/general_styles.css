@@ -47,6 +47,6 @@ font-family: 'Bitter', serif;
 
 #navbar{
     width: 100vw;
-    padding: 15px;
+    padding: 0;
     position: fixed;
 }
