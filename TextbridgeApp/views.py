@@ -63,8 +63,8 @@ def registration_success(request):
 def sms_api(request):
     if request.method == 'POST':
         resp = MessagingResponse()
-        to_send = resp.message('Sample')
-        return HttpResponse(str(to_send))
+        msg = resp.message('Sample')
+        return HttpResponse(str(resp))
     else:
         return HttpResponse(status=204)
 
