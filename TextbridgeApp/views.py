@@ -100,10 +100,12 @@ def sms_api(request):
     to_name = message_body.split('\n')[0].strip()
     to_number = get_to_number(to_name)
 
+    message_to_send = message_body.split('\n', 1)[1]
+
     from_name = get_from_name(from_number)
 
     # Start our TwiML response
     resp = MessagingResponse()
-    msg = resp.message("Message from: {} at {}\n{}".format(from_name, from_number, message_body), to=to_number)
+    msg = resp.message("Message from: {}:\n\n{}".format(from_name, message_to_send), to=to_number)
     return HttpResponse(str(resp))
 
