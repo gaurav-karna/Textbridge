@@ -3,7 +3,7 @@ from twilio.rest import Client
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
 
-from Textbridge.secrets import *
+from secrets_twilio import *
 app = Flask(__name__)
 
 
@@ -22,5 +22,18 @@ class SendRecTexts:
 
         print(message.sid)
 
+    # @app.route("/sms", methods=['GET', 'POST'])
+    # def recTexts(self):
+    #     """Respond to incoming calls with a simple text message."""
+    #     # Start our TwiML response
+    #     resp = MessagingResponse()
+
+    #     # Add a message
+    #     resp.message("The Robots are coming! Head for the hills!")
+    #     return str(resp)
+
+# if __name__ == "__main__":
 obj = SendRecTexts()
+    # app.run(debug=True)
+
 # obj.sendTexts("Send this to me","+16476716466")
