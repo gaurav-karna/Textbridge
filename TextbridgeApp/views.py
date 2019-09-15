@@ -4,7 +4,6 @@ from .secrets_twilio import *
 from .forms import *
 from .models import *
 from django.contrib.auth.models import User
-import social_django
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from twilio.twiml.messaging_response import MessagingResponse
@@ -86,7 +85,7 @@ def get_to_number(to_name: str):
     user_list = User.objects.all()
     for entry in user_list:
         if "{} {}".format(entry.first_name, entry.last_name).lower() == to_name.lower():
-            return "here!!!!!!!!!!!!!!!!"
+            return entry.social_auth.filter(user=entry.username).extra_data['phone_number']
     return None
 
 
