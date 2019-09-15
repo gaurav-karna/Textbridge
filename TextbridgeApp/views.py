@@ -121,7 +121,7 @@ def sms_api(request):
     #
     # # successful text redirect
     resp = MessagingResponse()
-    msg = resp.message("Message from: {}\n{}".format(from_name, message_body), to=to_number)
+    msg = resp.message("Message from: {}\n{}".format(from_name, message_body))
     return HttpResponse(str(resp))
 
 
