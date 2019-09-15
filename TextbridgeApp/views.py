@@ -64,4 +64,5 @@ def sms_api(request):
     resp = MessagingResponse()
     resp.message(str(request))
     print(str(resp))
+    return HttpResponse('')
 
