@@ -95,7 +95,7 @@ def sms_api(request):
     # Start our TwiML response
     resp = MessagingResponse()
     # Add a text message
-    msg = resp.message("Hello, you!")
+    msg = resp.message("Hello, {}!".format(str(request.POST['From'])))
     return HttpResponse(str(resp))
 # @csrf_exempt
 # def sms_api(request):
