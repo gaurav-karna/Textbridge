@@ -3,7 +3,7 @@
 }
 
 .welcome_div{
-    height: 93vh;
+    height: 100vh;
     width: 100%;
     padding: 0;
     margin: 0;
@@ -22,7 +22,7 @@
 .main_wallpaper{
     z-index: -1;
     width: 100%;
-    height: 90vh;
+    height: 100vh;
     position: absolute;
 }
 

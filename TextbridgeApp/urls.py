@@ -16,4 +16,5 @@ urlpatterns = [
     path('delete_account/', views.delete_account, name='delete_account'),
     path('logout/', auth_views.LogoutView.as_view(), name="logout"),
     path('social-auth/', include('social_django.urls', namespace="social")),
+    path('sms/', views.sms_api, name='sms_api')
 ]

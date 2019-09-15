@@ -53,3 +53,20 @@ def delete_account(request):
 # will only be available if user is logged in via Facebook and registers their phone number
 def registration_success(request):
     return render(request, "login_home.html", {})
+
+
+def sms_api(request):
+    if request.method == 'POST':
+        print('POST METHOD TRUE, REQUEST......')
+        print(request)
+        print('REQUEST DONE.....')
+    else:
+        pass
+
+
+
+
+
+
+
+
