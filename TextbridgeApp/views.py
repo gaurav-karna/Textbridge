@@ -99,12 +99,13 @@ def sms_api(request):
     message_body = str(request.POST['Body'])
     to_name = message_body.split('\n')[0]           # user-responsible for first line being first and last name
     from_number = str(request.POST['From'])
-    return HttpResponse(str(resp))
+
     from_name = get_from_name(from_number)
     if from_name is None:
         msg = resp.message("Could not find your number in our system. Please register at https://textbridge.online")
         return HttpResponse(str(resp)) # send failure text with return that number has not been registered with us
 
+    return HttpResponse(str(resp))
     # returns a dict where keys are friends names, and values are user objects
     user_friends = get_user_friends(from_number)
     if not user_friends:
