@@ -61,7 +61,11 @@ def registration_success(request):
 
 @csrf_exempt
 def sms_api(request):
+    # Start our TwiML response
     resp = MessagingResponse()
-    msg = resp.message('Sample')
+
+    # Add a text message
+    msg = resp.message("Hello, you!")
+
     return HttpResponse(str(resp))
 
