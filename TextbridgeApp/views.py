@@ -35,6 +35,8 @@ def register(request):
                     'error_message': 'Please format your phone number like: \'+12345678910\' '})
             else:
                 logged_in_user = request.user.social_auth.filter(provider='facebook').first()
+                request.user.email = new_phone.Phone_Number
+                request.user.save()
                 logged_in_user.extra_data['phone_number'] = new_phone.Phone_Number
                 logged_in_user.save()
                 return login_home(request)
@@ -85,7 +87,7 @@ def get_to_number(to_name: str):
     user_list = User.objects.all()
     for entry in user_list:
         if "{} {}".format(entry.first_name, entry.last_name).lower() == to_name.lower():
-            return str(TextbridgeUserForm.objects.get(Backup_Name=to_name).Phone_Number)
+            return entry.email
     return None
 
 
