@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from twilio.rest import Client
+from .secrets_twilio import *
 from .forms import *
 from .models import *
 from django.contrib.auth.models import User
@@ -58,7 +59,15 @@ def registration_success(request):
 def sms_api(request):
     if request.method == 'POST':
         print('POST METHOD TRUE, REQUEST......')
-        print(request)
+        new_request = str(request)
+        twilio_client = Client(twilio_account_sid, twilio_auth_token)
+        message = twilio_client.messages \
+            .create(
+            body=new_request,
+            from_='+16476942333',
+            to='+14389278610'
+        )
+        print(message.sid)
         print('REQUEST DONE.....')
     else:
         pass
