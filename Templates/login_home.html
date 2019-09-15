@@ -45,7 +45,7 @@
     <h2>Logged in as: {{ user.first_name }} {{ user.last_name }}</h2>
     <h4>Your Information:</h4>
     <ul>
-        <li>Email: {{ user.email }}</li>
+{#        <li>Email: {{ user.email }}</li>#}
         <li>UID: {{ fb_user.uid }}</li>
         {% if fb_user.extra_data.phone_number is None %}
             <li>Phone: Not Provided
