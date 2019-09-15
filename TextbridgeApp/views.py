@@ -8,6 +8,7 @@ import social_django
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from twilio.twiml.messaging_response import MessagingResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
@@ -58,6 +59,7 @@ def registration_success(request):
     return render(request, "login_home.html", {})
 
 
+@csrf_exempt
 def sms_api(request):
     if request.method == 'POST':
         resp = MessagingResponse()
@@ -65,11 +67,6 @@ def sms_api(request):
         return str(resp)
     else:
         pass
-
-
-
-
-
 
 
 
