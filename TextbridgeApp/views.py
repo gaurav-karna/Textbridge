@@ -85,7 +85,7 @@ def get_to_number(to_name: str):
     user_list = User.objects.all()
     for entry in user_list:
         if "{} {}".format(entry.first_name, entry.last_name).lower() == to_name.lower():
-            return entry.social_auth.filter(user=entry.username).extra_data['phone_number']
+            return entry.social_auth.get(provider='facebook').extra_data['phone_number']
     return None
 
 
@@ -99,6 +99,7 @@ def sms_api(request):
 
     # Start our TwiML response
     resp = MessagingResponse()
+
     # Add a text message
     if to_number is not None:
         msg = resp.message("Message to: {} at {}\n{}".format(to_name, str(to_number), message_body))
