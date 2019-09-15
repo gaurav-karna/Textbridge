@@ -6,6 +6,8 @@ from .models import *
 from django.contrib.auth.models import User
 import social_django
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from twilio.twiml.messaging_response import MessagingResponse
 
 
 def index(request):
@@ -58,17 +60,9 @@ def registration_success(request):
 
 def sms_api(request):
     if request.method == 'POST':
-        print('POST METHOD TRUE, REQUEST......')
-        new_request = str(request)
-        twilio_client = Client(twilio_account_sid, twilio_auth_token)
-        message = twilio_client.messages \
-            .create(
-            body=new_request,
-            from_='+16476942333',
-            to='+14389278610'
-        )
-        print(message.sid)
-        print('REQUEST DONE.....')
+        resp = MessagingResponse()
+        resp.message(str(request))
+        return str(resp)
     else:
         pass
 
