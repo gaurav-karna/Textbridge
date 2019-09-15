@@ -29,8 +29,6 @@ def register(request):
         phone_to_save = TextbridgeUserForm(request.POST)
         if phone_to_save.is_valid():
             new_phone = phone_to_save.save()
-            new_phone.Backup_Name = request.user.first_name + ' ' + request.user.last_name
-            new_phone.save()
             if (len(new_phone.Phone_Number) != 12) or (not new_phone.Phone_Number.startswith('+1')):
                 # informs the user that the phone number is not formatted correctly
                 return render(request, "registration_error.html", {
