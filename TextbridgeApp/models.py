@@ -8,3 +8,6 @@ class TextbridgeUser(models.Model):
                                     help_text='Format your number like: +12345678910')
 
     Backup_Name = models.CharField(max_length=64, verbose_name='Backup Referring Name', default=None, null=True)
+
+    def __str__(self):
+        return str(self.Backup_Name)
