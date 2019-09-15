@@ -101,7 +101,10 @@ def sms_api(request):
     # Start our TwiML response
     resp = MessagingResponse()
     # Add a text message
-    msg = resp.message("Message to: {} at {}\n{}".format(to_name, str(to_number), message_body))
+    if to_number is not None:
+        msg = resp.message("Message to: {} at {}\n{}".format(to_name, str(to_number), message_body))
+    else:
+        msg = resp.message("Message to: {}\n{}".format(to_name, message_body))
     return HttpResponse(str(resp))
 # @csrf_exempt
 # def sms_api(request):
