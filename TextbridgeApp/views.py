@@ -92,36 +92,43 @@ def get_to_number(to_name: str):
 
 @csrf_exempt
 def sms_api(request):
-    # getting info from request
-    message_body = str(request.POST['Body'])
-    to_name = message_body.split('\n')[0]           # user-responsible for first line being first and last name
-    from_number = str(request.POST['From'])
-
-    from_name = get_from_name(from_number)
-    # if from_name is None:
-    #     resp = MessagingResponse()
-    #     msg = resp.message("Could not find your number in our system. Please register at https://textbridge.online")
-    #     return HttpResponse(str(resp)) # send failure text with return that number has not been registered with us
-    #
-    # resp = MessagingResponse()
-    # msg = resp.message("Got here! {}".format(from_name))
-    # return HttpResponse(str(resp))
-    #
-    # # returns a dict where keys are friends names, and values are user objects
-    user_friends = get_user_friends(from_number)
-    # if not user_friends:
-    #     msg = resp.message("Could not parse your friend list. Please register at https://textbridge.online")
-    #     return HttpResponse(str(resp))  # friend list could not be parsed (FAILURE)
-    #
-    to_number = user_friends.get(to_name.lower(), None)
-    # if to_number is None:
-    #     # send failure text with return saying that user's number could not be found
-    #     msg = resp.message("Could not retrieve recipient's number. Either not registered, or not your friend")
-    #     return HttpResponse(str(resp))
-    #
-    # # successful text redirect
+    # Start our TwiML response
     resp = MessagingResponse()
-    msg = resp.message("Message from: {}\n{}".format(from_name, message_body))
+    # Add a text message
+    msg = resp.message("Hello, you!")
     return HttpResponse(str(resp))
+# @csrf_exempt
+# def sms_api(request):
+#     # getting info from request
+#     message_body = str(request.POST['Body'])
+#     to_name = message_body.split('\n')[0]           # user-responsible for first line being first and last name
+#     from_number = str(request.POST['From'])
+#
+#     from_name = get_from_name(from_number)
+#     # if from_name is None:
+#     #     resp = MessagingResponse()
+#     #     msg = resp.message("Could not find your number in our system. Please register at https://textbridge.online")
+#     #     return HttpResponse(str(resp)) # send failure text with return that number has not been registered with us
+#     #
+#     # resp = MessagingResponse()
+#     # msg = resp.message("Got here! {}".format(from_name))
+#     # return HttpResponse(str(resp))
+#     #
+#     # # returns a dict where keys are friends names, and values are user objects
+#     user_friends = get_user_friends(from_number)
+#     # if not user_friends:
+#     #     msg = resp.message("Could not parse your friend list. Please register at https://textbridge.online")
+#     #     return HttpResponse(str(resp))  # friend list could not be parsed (FAILURE)
+#     #
+#     to_number = user_friends.get(to_name.lower(), None)
+#     # if to_number is None:
+#     #     # send failure text with return saying that user's number could not be found
+#     #     msg = resp.message("Could not retrieve recipient's number. Either not registered, or not your friend")
+#     #     return HttpResponse(str(resp))
+#     #
+#     # # successful text redirect
+#     resp = MessagingResponse()
+#     msg = resp.message("Message from: {}\n{}".format(from_name, message_body))
+#     return HttpResponse(str(resp))
 
 
