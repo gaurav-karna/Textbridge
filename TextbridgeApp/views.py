@@ -61,7 +61,10 @@ def registration_success(request):
 
 @csrf_exempt
 def sms_api(request):
-    resp = MessagingResponse()
-    to_send = resp.message(str(request))
-    return HttpResponse(str(to_send))
+    if request.method == 'POST':
+        resp = MessagingResponse()
+        to_send = resp.message('Sample')
+        return HttpResponse(str(to_send))
+    else:
+        return HttpResponse(status=204)
 
