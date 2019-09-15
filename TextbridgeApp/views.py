@@ -85,7 +85,7 @@ def get_to_number(to_name: str):
     user_list = User.objects.all()
     for entry in user_list:
         if "{} {}".format(entry.first_name, entry.last_name).lower() == to_name.lower():
-            return entry.social_auth.get(provider='facebook').extra_data['phone_number']
+            return str(TextbridgeUserForm.objects.get(Backup_Name=to_name).Phone_Number)
     return None
 
 
