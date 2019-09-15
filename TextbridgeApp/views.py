@@ -65,7 +65,7 @@ def sms_api(request):
     resp = MessagingResponse()
 
     # Add a text message
-    msg = resp.message("Hello, you!")
+    msg = resp.message("{}".format(str(request)))
 
     return HttpResponse(str(resp))
 
