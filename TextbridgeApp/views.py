@@ -106,6 +106,7 @@ def sms_api(request):
 
     # Start our TwiML response
     resp = MessagingResponse()
-    msg = resp.message("Message from: {}:\n\n{}".format(from_name, message_to_send), to=to_number)
+    msg = resp.message("Facebook message via Textbridge from: {}:\n\n{}".format(
+        from_name, message_to_send), to=to_number)
     return HttpResponse(str(resp))
 
